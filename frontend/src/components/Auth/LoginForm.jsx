@@ -8,35 +8,60 @@
  * License: MIT
  * Copyright (c) 2025 RedRoomSim Team
  * Description: User login form component for the RedRoomSim application. It allows users to enter their credentials and log in to the application. The form includes fields for username and password, and a submit button to initiate the login process.
- * Last Updated: Redirects user to role-based route on successful login.
+* Last Updated: add firebase config and update login form to use Firebase authentication
  */
 
 // Import necessary libraries and components
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/logo.png";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebase/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 
-// LoginForm component allows users to log in to the application
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // handleSubmit function processes the login form submission
-  const handleSubmit = (e) => {
+  const logoutMessage = location.state?.message;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = login(username, password);
-    if (success) {
-      navigate("/redirect");
-    } else {
-      setError("Invalid credentials");
+    setError("");
+
+    try {
+      const result = await signInWithEmailAndPassword(auth, username, password);
+      const user = result.user;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        const role = userDocSnap.data().role?.toLowerCase().trim();
+        setUser({ ...user, role });
+
+        if (role === "admin") {
+          navigate("/admin");
+        } else if (role === "instructor") {
+          navigate("/instructor");
+        } else {
+          navigate("/dashboard");
+        }
+      } else {
+        setError("User role not found. Contact support.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Invalid email or password");
     }
   };
 
-  // Render the login form
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96 space-y-4">
@@ -46,11 +71,15 @@ const LoginForm = () => {
 
         <h2 className="text-2xl font-bold text-center">Red Room Simulation</h2>
 
+        {logoutMessage && (
+          <div className="text-green-600 text-center">{logoutMessage}</div>
+        )}
+
         {error && <div className="text-red-500 text-center">{error}</div>}
 
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="border p-2 rounded w-full"

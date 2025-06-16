@@ -8,7 +8,7 @@
  * License: MIT
  * Copyright (c) 2025 RedRoomSim Team
  * Description: Sidebar navigation with role-based menu rendering.
- * Last Updated: Added role-based visibility for Admin menu item & improved hamburger positioning.
+ * Last Updated: Added sidebar component with role-based menu rendering and responsive design.
  */
 
 // Import necessary libraries and components
@@ -63,8 +63,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           {isOpen && <span>Upload Evidence</span>}
         </Link>
 
-        {/* Admin Panel only visible for Administrator */}
-        {user?.role === "Administrator" && (
+        {/* Admin Panel only visible for Admin */}
+        {user?.role === "admin" && (
           <Link to="/Underconstruction" className="flex items-center space-x-3 py-2 px-4 rounded hover:bg-gray-700">
             <span className="text-2xl">⚙️</span>
             {isOpen && <span>Admin Panel</span>}
@@ -77,3 +77,4 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
 // Export the Sidebar component for use in other parts of the application
 export default Sidebar;
+

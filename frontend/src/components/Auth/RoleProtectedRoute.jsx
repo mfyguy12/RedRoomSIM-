@@ -29,9 +29,10 @@ const RoleProtectedRoute = ({ allowedRoles, children }) => {
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-
+  const userRole = user.role?.toLowerCase();
+  const normalizedAllowed = allowedRoles.map(r => r.toLowerCase());
   // Check if the user's role is allowed. If not, redirect to the dashboard
-  if (!allowedRoles.includes(user.role)) {
+  if (!normalizedAllowed.includes(userRole)) {
     return <Navigate to="/dashboard" replace />;
   }
   

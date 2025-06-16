@@ -84,8 +84,8 @@ const App = () => {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/redirect" element={<SecureRoute><RoleBasedRedirect /></SecureRoute>} />
 
-          <Route path="/admin" element={<SecureRoute><RoleProtectedRoute allowedRoles={["Administrator"]}><Layout><Admin /></Layout></RoleProtectedRoute></SecureRoute>} />
-          <Route path="/underconstruction" element={<SecureRoute><RoleProtectedRoute allowedRoles={["Administrator"]}><Layout><Underconstruction /></Layout></RoleProtectedRoute></SecureRoute>} />
+          <Route path="/admin" element={<SecureRoute><RoleProtectedRoute allowedRoles={["admin"]}><Layout><Admin /></Layout></RoleProtectedRoute></SecureRoute>} />
+          <Route path="/underconstruction" element={<SecureRoute><RoleProtectedRoute allowedRoles={["admin"]}><Layout><Underconstruction /></Layout></RoleProtectedRoute></SecureRoute>} />
           <Route path="/dashboard" element={<SecureRoute><Layout><Dashboard /></Layout></SecureRoute>} />
 
           <Route path="/scenarios" element={<SecureRoute><Layout><ScenarioSelectorPage /></Layout></SecureRoute>} />
