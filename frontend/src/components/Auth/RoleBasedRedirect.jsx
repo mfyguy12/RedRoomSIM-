@@ -28,14 +28,14 @@ const RoleBasedRedirect = () => {
     }
 // Redirect based on user role
     switch (user.role) {
-      case "Administrator":
+      case "admin":
         navigate("/admin");
         break;
-      case "User":
+      case "student":
         navigate("/dashboard");
         break;
       default:
-        navigate("/dashboard");
+        navigate("/login", {state: { message: "User role not recognized. Please contact support." },replace: true,});
         break;
     }
   }, [user, navigate]);

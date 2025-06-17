@@ -15,41 +15,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../../firebase/firebaseConfig";
+
 
 // RegisterForm component allows users to register for an account
 const RegisterForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    email: "",
-  });
-
-  // State to manage error messages
+  const [form, setForm] = useState({ email: "", password: "", name: "" });
   const [error, setError] = useState("");
-  // useNavigate hook from react-router-dom for navigation
   const navigate = useNavigate();
-  // Function to handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    // Mock registration success/failure simulation
-    if (formData.username && formData.password && formData.email) {
-      alert("Registration successful!");
-      navigate("/login");
-    } else {
-      setError("Please fill all fields correctly.");
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const userCred = await createUserWithEmailAndPassword(auth, form.email, form.password);
+      const uid = userCred.user.uid;
+
+      // Store user details in Firestore with default "pending" role
+      await setDoc(doc(db, "users", uid), {
+        name: form.name,
+        email: form.email,
+        role: "pending",
+        createdAt: new Date().toISOString()
+      });
+
+      navigate("/login", { state: { message: "Registration successful! Awaiting admin approval." } });
+    } catch (err) {
+      console.error(err);
+      setError("Registration failed: " + err.message);
     }
   };
+
 
   // Render the registration form
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96 space-y-4">
+      <form onSubmit={handleRegister} className="bg-white p-8 rounded shadow-md w-96 space-y-4">
 
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Red Room Simulation" className="h-16 w-16" />
@@ -61,9 +69,9 @@ const RegisterForm = () => {
 
         <input
           type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
+          name="fullName"
+          placeholder="Full Name"
+          value={form.fullName}
           onChange={handleChange}
           className="border p-2 rounded w-full"
         />
@@ -72,7 +80,7 @@ const RegisterForm = () => {
           type="email"
           name="email"
           placeholder="Email"
-          value={formData.email}
+          value={form.email}
           onChange={handleChange}
           className="border p-2 rounded w-full"
         />
@@ -81,7 +89,7 @@ const RegisterForm = () => {
           type="password"
           name="password"
           placeholder="Password"
-          value={formData.password}
+          value={form.password}
           onChange={handleChange}
           className="border p-2 rounded w-full"
         />

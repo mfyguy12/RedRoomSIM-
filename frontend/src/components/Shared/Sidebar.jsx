@@ -65,7 +65,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
         {/* Admin Panel only visible for Admin */}
         {user?.role === "admin" && (
-          <Link to="/Underconstruction" className="flex items-center space-x-3 py-2 px-4 rounded hover:bg-gray-700">
+          <Link to="/admin" className="flex items-center space-x-3 py-2 px-4 rounded hover:bg-gray-700">
             <span className="text-2xl">⚙️</span>
             {isOpen && <span>Admin Panel</span>}
           </Link>

@@ -12,22 +12,45 @@
  */
 
 // Import necessary libraries and components
-import React from "react";
 import underconstruction from "../assets/uc.png";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
-// Admin component renders the admin panel landing page with an under construction image
 const Admin = () => {
-  return (
-   
-      
-      <div className="flex flex-col items-center mt-4">
-        <h2 className="text-2xl font-bold mb-4">Admin Panel</h2>
-        <img src={underconstruction} alt="underconstruction" className="h-80 w-80" />
-      </div>
+  const [hasPendingUsers, setHasPendingUsers] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const checkPendingUsers = async () => {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const pending = querySnapshot.docs.some(doc => doc.data().role === "pending");
+      setHasPendingUsers(pending);
+    };
+    checkPendingUsers();
+  }, []);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+
+      {hasPendingUsers && (
+        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 flex justify-between items-center rounded">
+          <div>There are users pending approval.</div>
+          <button
+            onClick={() => navigate("/admin/pending-users")}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
+          >
+            Review
+          </button>
+        </div>
+      )}
+
+      {/* Add more admin content here */}
+      <p>Welcome to the admin panel. You can manage users, content, and settings here.</p>
+    </div>
   );
 };
 
-
-// Export the Admin component as default
 export default Admin;

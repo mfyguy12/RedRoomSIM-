@@ -21,6 +21,8 @@ import { auth } from "../../../firebase/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 
+
+
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -48,13 +50,13 @@ const LoginForm = () => {
 
         if (role === "admin") {
           navigate("/admin");
-        } else if (role === "instructor") {
-          navigate("/instructor");
-        } else {
+        } else if (role === "student") {
           navigate("/dashboard");
+        } else {
+          navigate("/login", {state: { message: "User role not recognized. Please contact support." }, replace: true });
         }
       } else {
-        setError("User role not found. Contact support.");
+        setError("User role not found. Please contact support.");
       }
     } catch (err) {
       console.error("Login error:", err);

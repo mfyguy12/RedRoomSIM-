@@ -35,7 +35,7 @@ const Topbar = ({ sidebarOpen }) => {
     setShowToast(true);
     setTimeout(() => {
       setShowToast(false);
-      navigate("/login", { state: { message: "You have been logged out." } });
+      navigate("/login", { state: { message: "You have been logged out." }, replace: true });
     }, 1500);
   };
 
