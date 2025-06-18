@@ -25,9 +25,7 @@ const Topbar = ({ sidebarOpen }) => {
   const [showToast, setShowToast] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const confirmLogout = () => {
-    setShowConfirm(true);
-  };
+  const confirmLogout = () => setShowConfirm(true);
 
   const handleLogout = async () => {
     setShowConfirm(false);
@@ -41,11 +39,11 @@ const Topbar = ({ sidebarOpen }) => {
 
   return (
     <>
-      {/* Custom Confirmation Modal */}
+      {/* Confirmation Modal */}
       {showConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
-          <div className="bg-white rounded shadow p-6 w-80 text-center">
-            <p className="mb-4 text-gray-800 font-medium">Are you sure you want to logout?</p>
+          <div className="bg-white dark:bg-gray-800 rounded shadow p-6 w-80 text-center text-gray-900 dark:text-white">
+            <p className="mb-4 font-medium">Are you sure you want to logout?</p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleLogout}
@@ -55,7 +53,7 @@ const Topbar = ({ sidebarOpen }) => {
               </button>
               <button
                 onClick={() => setShowConfirm(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded"
+                className="bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 text-gray-800 dark:text-white px-4 py-2 rounded"
               >
                 Cancel
               </button>
@@ -66,7 +64,7 @@ const Topbar = ({ sidebarOpen }) => {
 
       {/* Toast Message */}
       {showToast && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-black px-6 py-4 rounded shadow-lg border border-gray-300 z-50">
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-black dark:text-white px-6 py-4 rounded shadow-lg border border-gray-300 dark:border-gray-600 z-50">
           <p className="mb-2 font-medium">You have been logged out.</p>
           <div className="flex justify-center">
             <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded">
@@ -77,9 +75,11 @@ const Topbar = ({ sidebarOpen }) => {
       )}
 
       {/* Topbar */}
-      <div className="flex items-center justify-between bg-[#1f2937] text-white h-16 px-4 shadow-md">
+      <div className="flex items-center justify-between bg-white dark:bg-[#1f2937] text-gray-900 dark:text-white h-16 px-4 shadow-md transition-colors">
         <div className="flex items-center space-x-2">
-          <img src={logo} alt="Logo" className="h-10 w-10" />
+          <Link to="/dashboard" title="Go to Dashboard">
+            <img src={logo} alt="Logo" className="h-10 w-10 transition-transform hover:scale-105" />
+          </Link>
           <h1 className="text-xl font-bold hidden sm:block">Red Room Simulation</h1>
         </div>
         <div className="flex items-center space-x-4">
@@ -96,7 +96,7 @@ const Topbar = ({ sidebarOpen }) => {
             <img
               src={userAvatar}
               alt="User"
-              className="h-10 w-10 rounded-full border border-gray-300 object-cover"
+              className="h-10 w-10 rounded-full border border-gray-300 dark:border-gray-600 object-cover"
             />
           </Link>
           <button onClick={confirmLogout} title="Logout">

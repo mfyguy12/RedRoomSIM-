@@ -1,17 +1,3 @@
-/**
- * File: RegisterForm.jsx
- * Author: Umair Asad
- * path: /src/components/Auth/RegisterForm.jsx
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: User registration form component for the RedRoomSim application. It allows users to enter their details and register for an account. The form includes fields for username, password, and email, and a submit button to initiate the registration process.
- * Last Updated: On success, redirects user to login.
- */
-
-// Import necessary libraries and assets
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
@@ -19,10 +5,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase/firebaseConfig";
 
-
-// RegisterForm component allows users to register for an account
 const RegisterForm = () => {
-  const [form, setForm] = useState({ email: "", password: "", name: "" });
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    designation: ""
+  });
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -38,27 +29,28 @@ const RegisterForm = () => {
       const userCred = await createUserWithEmailAndPassword(auth, form.email, form.password);
       const uid = userCred.user.uid;
 
-      // Store user details in Firestore with default "pending" role
+      // Store user profile in Firestore with role = pending
       await setDoc(doc(db, "users", uid), {
-        name: form.name,
+        firstName: form.firstName,
+        lastName: form.lastName,
         email: form.email,
+        designation: form.designation,
         role: "pending",
         createdAt: new Date().toISOString()
       });
 
-      navigate("/login", { state: { message: "Registration successful! Awaiting admin approval." } });
+      navigate("/login", {
+        state: { message: "Registration successful! Awaiting admin approval." }
+      });
     } catch (err) {
       console.error(err);
       setError("Registration failed: " + err.message);
     }
   };
 
-
-  // Render the registration form
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <form onSubmit={handleRegister} className="bg-white p-8 rounded shadow-md w-96 space-y-4">
-
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Red Room Simulation" className="h-16 w-16" />
         </div>
@@ -69,9 +61,29 @@ const RegisterForm = () => {
 
         <input
           type="text"
-          name="fullName"
-          placeholder="Full Name"
-          value={form.fullName}
+          name="firstName"
+          placeholder="First Name"
+          value={form.firstName}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={form.lastName}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          required
+        />
+
+        <input
+          type="text"
+          name="designation"
+          placeholder="Designation"
+          value={form.designation}
           onChange={handleChange}
           className="border p-2 rounded w-full"
         />
@@ -83,6 +95,7 @@ const RegisterForm = () => {
           value={form.email}
           onChange={handleChange}
           className="border p-2 rounded w-full"
+          required
         />
 
         <input
@@ -92,6 +105,7 @@ const RegisterForm = () => {
           value={form.password}
           onChange={handleChange}
           className="border p-2 rounded w-full"
+          required
         />
 
         <button type="submit" className="w-full bg-[#111827] text-white p-2 rounded hover:bg-gray-700">
@@ -104,7 +118,6 @@ const RegisterForm = () => {
             Login here
           </span>
         </div>
-
       </form>
     </div>
   );

@@ -8,13 +8,18 @@
  * License: MIT
  * Copyright (c) 2025 RedRoomSim Team
  * Description: Firebase configuration and initialization.
- * Last Updated: Integrated Firestore and Authentication.
+ * Last Update: 2025-06-15
+ * changelog:
+ * - Initial setup for Firebase configuration.
+ * - Integrated Firestore and Authentication.
+ * - Added environment variable support for sensitive data.
  */
 
 // Import necessary Firebase modules
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+
 
 // web app's Firebase configuration
 const firebaseConfig = {

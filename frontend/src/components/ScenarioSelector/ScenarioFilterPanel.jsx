@@ -6,12 +6,12 @@ const ScenarioFilterPanel = ({ filters, setFilters }) => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 rounded-xl shadow">
+    <div className="p-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl shadow">
       <h2 className="text-lg font-semibold mb-3">Filter Scenarios</h2>
       <div className="grid grid-cols-2 gap-4">
         <select
           name="difficulty"
-          className="p-2 border rounded"
+          className="p-2 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           value={filters.difficulty}
           onChange={handleChange}
         >
@@ -23,7 +23,7 @@ const ScenarioFilterPanel = ({ filters, setFilters }) => {
 
         <select
           name="type"
-          className="p-2 border rounded"
+          className="p-2 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           value={filters.type}
           onChange={handleChange}
         >

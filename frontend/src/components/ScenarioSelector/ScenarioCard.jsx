@@ -6,10 +6,10 @@ const ScenarioCard = ({ scenario }) => {
 
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
-      case "Easy": return "bg-green-100";
-      case "Medium": return "bg-yellow-100";
-      case "Hard": return "bg-red-100";
-      default: return "bg-gray-100";
+      case "Easy": return "bg-green-100 dark:bg-green-900";
+      case "Medium": return "bg-yellow-100 dark:bg-yellow-900";
+      case "Hard": return "bg-red-100 dark:bg-red-900";
+      default: return "bg-gray-100 dark:bg-gray-800";
     }
   };
 
@@ -27,10 +27,10 @@ const ScenarioCard = ({ scenario }) => {
   };
 
   return (
-    <div className={`${getDifficultyColor(scenario.difficulty)} shadow rounded-xl p-4 hover:shadow-lg transition`}>
+    <div className={`${getDifficultyColor(scenario.difficulty)} shadow rounded-xl p-4 hover:shadow-lg transition text-gray-900 dark:text-white`}>
       <h3 className="text-xl font-bold mb-2">{scenario.title}</h3>
-      <p className="text-sm text-gray-700 mb-3">{scenario.description}</p>
-      <div className="text-sm text-gray-600 mb-2">
+      <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">{scenario.description}</p>
+      <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
         Type: {scenario.type} | Difficulty: {scenario.difficulty}
       </div>
       <button

@@ -23,12 +23,12 @@ const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true); // Sidebar state to control visibility
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
       {/* Sidebar rendered with toggle */}
       <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       
       {/* Main content area */}
-      <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-20'} bg-gray-50`}>
+      <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-20'}`}>
         <Topbar sidebarOpen={sidebarOpen} />
         <div className="p-6">
           {children}
