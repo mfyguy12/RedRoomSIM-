@@ -1,15 +1,20 @@
-/**
- * File: ScenarioSelectorPage.jsx
- * Path: /src/pages/ScenarioSelectorPage.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Scenario selection screen.
- * Last Updated: Connected to ScenarioSelector module.
- */
+/*
+File:                 ScenarioSelectorPage.jsx
+Path:                 /src/pages/ScenarioSelectorPage.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Scenario selection screen.
+Changelog:
+ - Initial setup for ScenarioSelectorPage component.
+ - Integrated scenario filtering and selection features.
+ - Implemented responsive design for better user experience.
+ - Added dark mode support for better user experience.
+*/
 
 // Import necessary libraries and components
 import React, { useState } from "react";

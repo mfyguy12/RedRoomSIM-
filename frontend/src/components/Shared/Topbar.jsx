@@ -1,15 +1,19 @@
-/**
- * File: Topbar.jsx
- * Path: /src/components/Shared/Topbar.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Top navigation bar containing menu icons and profile access.
- * Last Updated: Added top navigation bar with menu icons and profile access, including logout confirmation and toast messages.
- */
+/*
+File:                 topbar.jsx
+Path:                 /src/components/Shared/Topbar.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Top navigation bar containing menu icons and profile access.
+Changelog:
+ - Initial setup for Topbar component.
+ - Added support for dark mode styling.
+ - Implemented responsive design for better user experience.
+*/
 
 // Import necessary libraries and components
 import React, { useState } from "react";

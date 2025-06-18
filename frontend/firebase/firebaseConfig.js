@@ -1,19 +1,19 @@
-/**
- * File: firebaseConfig.js
- * Path: /src/firebase/firebaseConfig.js
- * Author: Umair Asad
- * Last Modified: 2025-06-15
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Firebase configuration and initialization.
- * Last Update: 2025-06-15
- * changelog:
- * - Initial setup for Firebase configuration.
- * - Integrated Firestore and Authentication.
- * - Added environment variable support for sensitive data.
- */
+/*
+File:                 firebaseConfig.js
+Path:                 /src/firebase/firebaseConfig.js
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Firebase configuration and initialization.
+Changelog:
+ - Initial setup for Firebase configuration.
+ - Integrated Firestore and Authentication.
+ - Added environment variable support for sensitive data.
+*/
 
 // Import necessary Firebase modules
 import { initializeApp } from "firebase/app";

@@ -1,3 +1,20 @@
+/*
+File:                 AdminPendingUsers.jsx
+Path:                 /src/components/AdminPanel/AdminPendingUsers.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component to display admin pending user requests.
+Changelog:
+ - Initial setup for Admin Pending Users component.
+ - Integrated Firestore for user data fetching.
+ - Added functionality to approve or reject user requests.
+*/
+
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";

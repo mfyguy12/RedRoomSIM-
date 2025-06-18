@@ -1,3 +1,21 @@
+/*
+File:                 ThemeContext.jsx
+Path:                 /src/context/ThemeContext.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Managing theme state in the Red Room Simulation application.
+Changelog:
+ - Initial setup for ThemeContext.
+ - Added support for dark mode.
+ - Implemented theme toggling functionality.
+ - Improved responsiveness for different screen sizes.
+*/
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();

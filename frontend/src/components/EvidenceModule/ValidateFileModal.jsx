@@ -1,3 +1,21 @@
+/*
+File:                 ValidateFileModal.jsx
+Path:                 /src/components/EvidenceModule/ValidateFileModal.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Modal for validating uploaded files.
+Changelog:
+ - Initial setup for ValidateFileModal component.
+ - Added file type validation.
+ - Implemented file size limit check.
+ - Added user feedback for validation results.
+*/
+
 import React, { useState, useEffect } from "react";
 
 const ValidateFileModal = ({ file, open, onClose }) => {

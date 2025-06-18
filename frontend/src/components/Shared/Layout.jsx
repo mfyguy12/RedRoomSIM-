@@ -1,15 +1,21 @@
-/**
- * File: Layout.jsx
- * Path: /src/components/Shared/Layout.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Layout wrapper including Sidebar and Topbar.
- * Last Updated: Integrated dynamic sidebar toggle and content layout.
- */
+/*
+File:                 layout.jsx
+Path:                 /src/components/Shared/Layout.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Layout component wrapping the main application structure.
+Changelog:
+ - Initial setup for Layout component.
+ - Integrated responsive design for better user experience.
+ - Added support for dark mode styling.
+ - Implemented dynamic sidebar toggle.
+ - Improved accessibility features.
+*/
 
 // Import necessary libraries and components
 import React, { useState } from "react";

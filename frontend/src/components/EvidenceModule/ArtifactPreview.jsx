@@ -1,3 +1,18 @@
+/*
+File:                 ArtifactPreview.jsx
+Path:                 /src/components/EvidenceModule/ArtifactPreview.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Artifact preview component for displaying submitted files in the evidence module.
+Changelog:
+ - Initial setup for ArtifactPreview component.
+*/
+
 import React from "react";
 
 const ArtifactPreview = ({ files }) => {

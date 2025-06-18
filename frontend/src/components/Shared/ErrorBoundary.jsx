@@ -1,16 +1,18 @@
-/**
- * File: ErrorBoundary.jsx
- * Path: /src/components/Shared/ErrorBoundary.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: ErrorBoundary component to catch JavaScript errors in child components and display a fallback UI.
- * This component is used to prevent the entire application from crashing due to errors in individual components.
- * Last Updated: Added error handling to display a user-friendly message when an error occurs.
- */
+/*
+File:                 ErrorBoundary.jsx
+Path:                 /src/components/Shared/ErrorBoundary.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          ErrorBoundary component to catch JavaScript errors in child components and display a fallback UI.
+Changelog:
+ - Initial setup for ErrorBoundary component.
+ - Implemented error handling to display a user-friendly message when an error occurs.
+*/
 
 // Import necessary libraries and components
 import React from "react";

@@ -1,49 +1,17 @@
-[/*import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/Shared/Layout";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import ScenarioSelectorPage from "./pages/ScenarioSelectorPage";
-import Upload from "./pages/Upload";
-import Admin from "./pages/Admin";
-import Simulation from "./pages/Simulation";
-import NotFound from "./pages/NotFound";
-import ContactPage from "./pages/ContactPage";
-import HelpPage from "./pages/HelpPage";
-import ProfilePage from "./pages/ProfilePage";
-import ProgressDashboardPage from "./pages/ProgressDashboardPage";
-import LoginForm from "./components/Auth/LoginForm";
-import SecureRoute from "./components/Auth/SecureRoute";
-import RegisterForm from "./components/Auth/RegisterForm";
-import RoleBasedRedirect from "./components/Auth/RoleBasedRedirect";
-import RoleProtectedRoute from "./components/Auth/RoleProtectedRoute";
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/dashboard" element={<SecureRoute><Layout><Dashboard /></Layout></SecureRoute>} />
-        <Route path="/" element={<SecureRoute><Layout><Home /></Layout></SecureRoute>} />
-        <Route path="/scenarios" element={<SecureRoute><Layout><ScenarioSelectorPage /></Layout></SecureRoute>} />
-        <Route path="/upload" element={<SecureRoute><Layout><Upload /></Layout></SecureRoute>} />
-        <Route path="/admin" element={<SecureRoute><Layout><Admin /></Layout></SecureRoute>} />
-        <Route path="/simulation/:id" element={<SecureRoute><Layout><Simulation /></Layout></SecureRoute>} />
-        <Route path="*" element={<SecureRoute><Layout><NotFound /></Layout></SecureRoute>} />
-        <Route path="/contact" element={<SecureRoute><Layout><ContactPage /></Layout></SecureRoute>} />
-        <Route path="/help" element={<SecureRoute><Layout><HelpPage /></Layout></SecureRoute>} />
-        <Route path="/profile" element={<SecureRoute><Layout><ProfilePage /></Layout></SecureRoute>} />
-        <Route path="/progress" element={<SecureRoute><Layout><ProgressDashboardPage /></Layout></SecureRoute>} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/redirect" element={<SecureRoute><RoleBasedRedirect /></SecureRoute>} />
-        <Route path="/admin" element={<SecureRoute><RoleProtectedRoute allowedRoles={["Administrator"]}><Layout><AdminPanel /></Layout></RoleProtectedRoute></SecureRoute>}/>
-        <Route path="/dashboard" element={<SecureRoute><Layout><ProgressTracker /></Layout></SecureRoute>}/>
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;*/]
+/*
+File:                 App.jsx
+Path:                 /src/App.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Main application component that sets up routing and context providers for authentication and theming.
+Changelog:
+  - Initial setup for App component with routing and context providers.
+*/
 
 
 

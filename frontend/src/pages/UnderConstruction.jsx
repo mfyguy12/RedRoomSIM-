@@ -1,3 +1,18 @@
+/*
+File:                 UnderConstruction.jsx
+Path:                 /src/pages/UnderConstruction.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Under construction page.
+Changelog:
+ - Initial setup for UnderConstruction component.
+*/
+
 import React from "react";
 import underconstruction from "../assets/uc.png";
 

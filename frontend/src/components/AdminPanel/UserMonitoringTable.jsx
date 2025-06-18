@@ -1,3 +1,20 @@
+/*
+File:                 UserMonitoringTable.jsx
+Path:                 /src/components/AdminPanel/UserMonitoringTable.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component to display user monitoring data.
+Changelog:
+ - Initial setup for User Monitoring Table component.
+ - Mock data for demonstration purposes.
+ - Styled with Tailwind CSS for consistent UI.
+*/
+
 import React from "react";
 
 const UserMonitoringTable = () => {

@@ -1,3 +1,4 @@
+//MOCK DATA FOR SCENARIOS
 export const scenarioList = [
   { id: 1, title: "Ransomware Attack", description: "Critical files encrypted.", difficulty: "Hard", type: "Ransomware" },
   { id: 2, title: "Insider Threat", description: "Suspicious privileged account activity.", difficulty: "Easy", type: "Data Breach" },

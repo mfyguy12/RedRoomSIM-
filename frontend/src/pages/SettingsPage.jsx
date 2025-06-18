@@ -1,3 +1,19 @@
+/*
+File:                 SettingsPage.jsx
+Path:                 /src/pages/SettingsPage.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          User settings and preferences screen.
+Changelog:
+  - Initial setup for SettingsPage component.
+  - Added dark mode toggle functionality.
+*/
+
 import React from "react";
 import { useTheme } from "../context/ThemeContext";
 

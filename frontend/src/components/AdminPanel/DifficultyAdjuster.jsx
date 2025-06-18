@@ -1,3 +1,19 @@
+/*
+File:                DifficultyAdjuster.jsx
+Path:                 /src/components/AdminPanel/DifficultyAdjuster.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component to adjust game difficulty.
+Changelog:
+ - Initial setup for Difficulty Adjuster component.
+ - Uses a range input to adjust difficulty level.
+*/
+
 import React, { useState } from "react";
 
 const DifficultyAdjuster = () => {

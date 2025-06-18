@@ -1,11 +1,17 @@
-/**
- * File: NotFound.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Description: 404 fallback page.
- * Last Updated: Added fallback for unknown routes.
- */
+/*
+File:                 NotFound.jsx
+Path:                 /src/pages/NotFound.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          404 Not Found page.
+Changelog:
+ - Initial setup for NotFound component.
+*/
 
 import React from "react";
 

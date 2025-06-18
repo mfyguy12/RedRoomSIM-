@@ -1,15 +1,18 @@
-/**
- * File: Admin.jsx
- * Path: /src/pages/Admin.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Admin panel landing page.
- * Last Updated: Placeholder for full AdminPanel module (ScenarioConfigurator + UserMonitoringTable).
- */
+/*
+File:                 Admin.jsx
+Path:                 /src/pages/Admin.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Admin panel landing page.
+Changelog:
+ - Initial setup for Admin panel.
+ - Integrated user management features.
+*/
 
 // Import necessary libraries and components
 import underconstruction from "../assets/uc.png";

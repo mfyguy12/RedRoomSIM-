@@ -1,3 +1,22 @@
+/*
+File:                 RegisterForm.jsx
+Path:                 /src/components/Auth/RegisterForm.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component for user registration functionality in the Red Room Simulation application.
+Changelog:
+ - Initial setup for RegisterForm component.
+ - Integrated Firebase authentication.
+ - Added error handling for registration failures.
+ - Displays success message after successful registration.
+ - Improved UI with Tailwind CSS for better user experience.
+*/
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";

@@ -1,16 +1,17 @@
-/**
- * File: ContactPage.jsx
- * Path: /src/pages/ContactPage.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Contact support information.
- * Last Updated: Placeholder contact screen.
- */
-
+/*
+File:                 ContactPage.jsx
+Path:                 /src/pages/ContactPage.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Contact support information.
+Changelog:
+  - Initial setup for ContactPage component.
+*/
 import React from "react";
 
 /**

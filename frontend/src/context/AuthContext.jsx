@@ -1,15 +1,21 @@
-/**
- * File: AuthContext.jsx
- * path: /src/context/AuthContext.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team 
- * Description: This file defines the AuthContext which provides authentication state and functions to login/logout users in the RedRoomSim application.
- * Last Updated: Added AuthContext to manage user authentication state and role fetching from Firestore.
- */
+/*
+File:                 AuthContext.jsx
+Path:                 /src/context/AuthContext.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Context API for managing user authentication state in the Red Room Simulation application.
+Changelog:
+ - Initial setup for AuthContext.
+ - Added support for user role management.
+ - Integrated Firebase authentication and Firestore for user data.
+ - Implemented login and logout functionality.
+ - Improved error handling and loading states.
+*/
 
 // import necessary libraries
 import React, { createContext, useContext, useState, useEffect } from "react";

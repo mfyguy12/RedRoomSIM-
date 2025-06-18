@@ -1,3 +1,20 @@
+/*
+File:                 AdminAuditLog.jsx
+Path:                 /src/components/AdminPanel/AdminAuditLog.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component to display admin audit logs.
+Changelog:
+ - Initial setup for Admin Audit Log component.
+ - Mock data for demonstration purposes.
+*/
+
+// Import necessary Firebase modules
 import React from "react";
 
 const AdminAuditLog = () => {

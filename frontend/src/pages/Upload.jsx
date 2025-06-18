@@ -1,15 +1,17 @@
-/**
- * File: Upload.jsx
- * Path: /src/pages/Upload.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Upload evidence screen.
- * Last Updated: Connected to EvidenceModule.
- */
+/*
+File:                 Upload.jsx
+Path:                 /src/pages/Upload.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Evidence upload screen.
+Changelog:
+  - Initial setup for Upload component.
+*/
 
 // Import necessary libraries and components
 import React from "react";

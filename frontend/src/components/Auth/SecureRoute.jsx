@@ -1,15 +1,20 @@
-/**
- * File: SecureRoute.jsx
- * Path: /src/components/Auth/SecureRoute.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: This file defines the SecureRoute component which protects routes in the RedRoomSim application, ensuring that only authenticated users can access certain pages.
- * Last Updated: Initial version with authentication-only guard.
- */
+/*
+File:                 SecureRoute.jsx
+Path:                 /src/components/Auth/SecureRoute.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component for secure route protection in the Red Room Simulation application.
+Changelog:
+ - Initial setup for SecureRoute component.
+ - Implemented authentication check for protected routes.
+ - Improved user experience with seamless navigation.
+*/
+
 
 // Import necessary libraries
 import React from "react";

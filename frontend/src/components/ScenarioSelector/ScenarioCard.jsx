@@ -1,3 +1,22 @@
+/*
+File:                 ScenarioCard.jsx
+Path:                 /src/components/ScenarioSelector/ScenarioCard.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component for displaying a scenario card in the Red Room Simulation application.
+Changelog:
+ - Initial setup for ScenarioCard component.
+ - Added functionality to navigate to the simulation page on button click.
+ - Implemented dynamic styling based on scenario difficulty and type.
+ - Improved accessibility features.
+ - Added support for dark mode styling.
+*/
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 

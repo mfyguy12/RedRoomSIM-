@@ -1,15 +1,20 @@
-/**
- * File: Dashboard.jsx
- * Path: /src/pages/Dashboard.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Default dashboard for authenticated users.
- * Last Updated: Connected to ProgressDashboard module.
- */
+/*
+File:                 Dashboard.jsx
+Path:                 /src/pages/Dashboard.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Default dashboard for authenticated users.
+Changelog:
+ - Initial setup for Dashboard component.
+ - Integrated ProgressTracker for user activity monitoring.
+ - Added responsive design for better user experience.
+*/
+
 
 // Import necessary libraries and components
 import React from "react";

@@ -1,15 +1,19 @@
-/**
- * File: RoleBasedRedirect.jsx
- * Path: /src/components/Auth/RoleBasedRedirect.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: This file defines the RoleBasedRedirect component which redirects users to different routes based on their roles in the RedRoomSim application. It ensures that users are directed to the appropriate page after login or when accessing the application.
- * Last Updated: Redirects users to appropriate route based on role.
- */
+/*
+File:                 RoleBasedRedirect.jsx
+Path:                 /src/components/Auth/RoleBasedRedirect.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component for role-based redirection in the Red Room Simulation application.
+Changelog:
+ - Initial setup for RoleBasedRedirect component.
+ - Implemented redirection logic based on user roles.
+ - Improved user experience with seamless navigation.
+*/
 
 // Import necessary libraries
 import React, { useEffect } from "react";

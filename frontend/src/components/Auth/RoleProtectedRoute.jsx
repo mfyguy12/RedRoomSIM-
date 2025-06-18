@@ -1,15 +1,19 @@
-/**
- * File: RoleProtectedRoute.jsx
- * Path: /src/components/Auth/RoleProtectedRoute.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team 
- * Description: This file defines the RoleProtectedRoute component which protects routes based on user roles in the RedRoomSim application. It ensures that only users with specific roles can access certain pages. 
- * Last Updated: Initial version with role-based access control (RBAC) enforcement. 
- **/
+/*
+File:                 RoleProtectedRoute.jsx
+Path:                 /src/components/Auth/RoleProtectedRoute.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Component for role-based route protection in the Red Room Simulation application.
+Changelog:
+ - Initial setup for RoleProtectedRoute component.
+ - Implemented role-based access control (RBAC) enforcement.
+ - Improved user experience with seamless navigation.
+*/
 
 // Import necessary libraries
 import React from "react";

@@ -1,15 +1,21 @@
-/**
- * File: Simulation.jsx
- * Path: /src/pages/Simulation.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Simulation engine entry page.
- * Last Updated: Connected to SimulationEngine module.
- */
+/*
+File:                 Simulation.jsx
+Path:                 /src/pages/Simulation.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Page for running a simulation scenario.
+Changelog:
+ - Initial setup for Simulation page.
+ - Integrated SimulationEngine components.
+ - Added routing for different simulation scenarios.
+ - Improved UI/UX for better user interaction.
+ - Dark mode support added
+*/
 
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -25,7 +31,11 @@ const Simulation = () => {
   const scenario = allScenarios[scenarioId];
 
   if (!scenario) {
-    return <div className="p-6">Scenario not found for ID: {id}</div>;
+    return (
+      <div className="p-6 text-gray-900 dark:text-white">
+        Scenario not found for ID: {id}
+      </div>
+    );
   }
 
   const [step, setStep] = useState(0);
@@ -42,7 +52,11 @@ const Simulation = () => {
   const handleDecision = (opt) => {
     const newScore = Math.min(score + opt.score, 100);
     setScore(newScore);
-    setFeedback({ message: opt.feedback, sdlc: opt.sdlc, color: getColorByScore(opt.score) });
+    setFeedback({
+      message: opt.feedback,
+      sdlc: opt.sdlc,
+      color: getColorByScore(opt.score),
+    });
     setTimeline([...timeline, { decision: opt.text, feedback: opt.feedback }]);
 
     if (step + 1 < scenario.simulation.length) {
@@ -51,10 +65,14 @@ const Simulation = () => {
   };
 
   return (
-    <div className="p-6 space-y-4">
-      <h2 className="text-lg font-bold">{scenario.title} (Scenario ID: {scenarioId})</h2>
+    <div className="p-6 space-y-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white rounded-xl transition-colors">
+      <h2 className="text-lg font-bold">
+        {scenario.title} (Scenario ID: {scenarioId})
+      </h2>
+
       <ScoringBar score={score} />
       <FeedbackOverlay feedback={feedback} />
+
       {step < scenario.simulation.length ? (
         <DecisionPrompt
           prompt={scenario.simulation[step].prompt}

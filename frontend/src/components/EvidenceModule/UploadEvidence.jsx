@@ -1,3 +1,18 @@
+/*
+File:                 UploadEvidence.jsx
+Path:                 /src/components/EvidenceModule/UploadEvidence.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Evidence upload component.
+Changelog:
+  - Initial setup for UploadEvidence component.
+*/
+
 import React, { useState } from "react";
 import ValidateFileModal from "./ValidateFileModal";
 import ArtifactPreview from "./ArtifactPreview";

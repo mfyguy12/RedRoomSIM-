@@ -1,15 +1,19 @@
-/**
- * File: Sidebar.jsx
- * Path: /src/components/Shared/Sidebar.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Sidebar navigation with role-based menu rendering.
- * Last Updated: Added sidebar component with role-based menu rendering and responsive design.
- */
+/*
+File:                 Sidebar.jsx
+Path:                 /src/components/Shared/Sidebar.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Sidebar component for navigation in the Red Room Simulation application.
+Changelog:
+ - Initial setup for Sidebar component.
+ - Added support for dark mode styling.
+ - Implemented responsive design for better user experience.
+*/
 
 // Import necessary libraries and components
 import React from "react";

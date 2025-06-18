@@ -1,15 +1,18 @@
-/**
- * File: HelpPage.jsx
- * Path: /src/pages/HelpPage.jsx
- * Author: Umair Asad
- * Last Modified: 2025-06-07
- * Version: 1.0.0
- * Project: RedRoomSim
- * License: MIT
- * Copyright (c) 2025 RedRoomSim Team
- * Description: Help and FAQ page.
- * Last Updated: Initial placeholder for help content.
- */
+/*
+File:                 HelpPage.jsx
+Path:                 /src/pages/HelpPage.jsx
+Author:               Umair Asad
+Last Modified By:     Umair Asad
+Last Modified Date:   2025-06-15
+Version:              1.0.0
+Project:              RedRoomSim
+License:              MIT
+Copyright (c) 2025 RedRoomSim Team
+Description:          Help and FAQ page.
+Changelog:
+ - Initial setup for HelpPage component.
+*/
+
 
 // Import necessary libraries and components
 import React from "react";
