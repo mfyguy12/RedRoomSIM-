@@ -24,13 +24,13 @@ const AdminAuditLog = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow p-6">
+    <div className="bg-white dark:bg-gray-800 dark:text-white rounded-xl shadow p-6">
       <h2 className="text-xl font-bold mb-4">Admin Audit Log</h2>
       <ul className="space-y-2">
         {mockLogs.map((log, index) => (
-          <li key={index} className="border p-2 rounded">
+          <li key={index} className="border dark:border-gray-600 p-2 rounded">
             <p>{log.action}</p>
-            <p className="text-xs text-gray-500">{log.timestamp}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{log.timestamp}</p>
           </li>
         ))}
       </ul>

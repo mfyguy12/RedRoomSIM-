@@ -20,7 +20,7 @@ const DifficultyAdjuster = () => {
   const [difficulty, setDifficulty] = useState(3);
 
   return (
-    <div className="bg-white rounded-xl shadow p-6">
+    <div className="bg-white dark:bg-gray-800 dark:text-white rounded-xl shadow p-6">
       <h2 className="text-xl font-bold mb-4">Difficulty Adjuster</h2>
       <input
         type="range"
@@ -28,7 +28,7 @@ const DifficultyAdjuster = () => {
         max="5"
         value={difficulty}
         onChange={(e) => setDifficulty(e.target.value)}
-        className="w-full"
+        className="w-full accent-red-600"
       />
       <p className="mt-2">Current Difficulty: {difficulty}</p>
     </div>

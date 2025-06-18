@@ -24,22 +24,22 @@ const UserMonitoringTable = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow p-6">
+    <div className="bg-white dark:bg-gray-800 dark:text-white rounded-xl shadow p-6">
       <h2 className="text-xl font-bold mb-4">User Monitoring</h2>
       <table className="w-full border-collapse">
-        <thead className="bg-gray-100">
+        <thead className="bg-gray-100 dark:bg-gray-700">
           <tr>
-            <th className="border px-4 py-2 text-left">Name</th>
-            <th className="border px-4 py-2 text-left">Status</th>
-            <th className="border px-4 py-2 text-left">Last Session</th>
+            <th className="border dark:border-gray-600 px-4 py-2 text-left">Name</th>
+            <th className="border dark:border-gray-600 px-4 py-2 text-left">Status</th>
+            <th className="border dark:border-gray-600 px-4 py-2 text-left">Last Session</th>
           </tr>
         </thead>
         <tbody>
           {mockUsers.map((user, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="border px-4 py-2">{user.name}</td>
-              <td className="border px-4 py-2">{user.status}</td>
-              <td className="border px-4 py-2">{user.lastSession}</td>
+            <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td className="border dark:border-gray-600 px-4 py-2">{user.name}</td>
+              <td className="border dark:border-gray-600 px-4 py-2">{user.status}</td>
+              <td className="border dark:border-gray-600 px-4 py-2">{user.lastSession}</td>
             </tr>
           ))}
         </tbody>
