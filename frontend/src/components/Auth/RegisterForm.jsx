@@ -15,6 +15,8 @@ Changelog:
  - Added error handling for registration failures.
  - Displays success message after successful registration.
  - Improved UI with Tailwind CSS for better user experience.
+ - Added strong password validation.
+ - Implemented form validation for required fields.
 */
 
 import React, { useState } from "react";
@@ -23,6 +25,12 @@ import logo from "../../assets/logo.png";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase/firebaseConfig";
+
+// Strong password check function
+const isStrongPassword = (password) => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return regex.test(password);
+};
 
 const RegisterForm = () => {
   const [form, setForm] = useState({
@@ -43,28 +51,35 @@ const RegisterForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
+    
+    if (!isStrongPassword(form.password)) {
+      setError("Password must include upper, lower case, number, special character and be at least 8 characters long.");
+      return;
+    } else {
+        try {
+          const userCred = await createUserWithEmailAndPassword(auth, form.email, form.password);
+          const uid = userCred.user.uid;
 
-    try {
-      const userCred = await createUserWithEmailAndPassword(auth, form.email, form.password);
-      const uid = userCred.user.uid;
+          // Store user profile in Firestore with role = pending
+          await setDoc(doc(db, "users", uid), {
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
+            designation: form.designation,
+            role: "pending",
+            createdAt: new Date().toISOString(),
+            failedAttempts: 0,
+            disabled: false
+          });
 
-      // Store user profile in Firestore with role = pending
-      await setDoc(doc(db, "users", uid), {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        email: form.email,
-        designation: form.designation,
-        role: "pending",
-        createdAt: new Date().toISOString()
-      });
-
-      navigate("/login", {
-        state: { message: "Registration successful! Awaiting admin approval." }
-      });
-    } catch (err) {
-      console.error(err);
-      setError("Registration failed: " + err.message);
-    }
+          navigate("/login", {
+            state: { message: "Registration successful! Awaiting admin approval." }
+          });
+        } catch (err) {
+          console.error(err);
+          setError("Registration failed: " + err.message);
+        }
+      }
   };
 
   return (
@@ -127,7 +142,7 @@ const RegisterForm = () => {
           required
         />
 
-        <button type="submit" className="w-full bg-[#111827] text-white p-2 rounded hover:bg-gray-700">
+        <button type="submit" className="w-full  bg-red-600 text-white p-2 rounded hover:bg-red-700">
           Register
         </button>
 

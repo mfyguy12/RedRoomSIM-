@@ -13,7 +13,9 @@ Changelog:
  - Initial setup for AdminUserList component.
  - Implemented user fetching and editing functionality.
  - Added loading state and error handling.
- - Implemented search functionality for user list.
+ - Implemented search functionality for user list.  
+ - Added modal for editing user details.
+ - Fixed the user role after editing.
 */
 
 import React, { useEffect, useState } from "react";
@@ -120,7 +122,7 @@ const AdminUserList = () => {
               <input name="lastName" value={editForm.lastName} onChange={handleChange} placeholder="Last Name" className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" />
               <input name="designation" value={editForm.designation} onChange={handleChange} placeholder="Designation" className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" />
               <select name="role" value={editForm.role} onChange={handleChange} className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white">
-                <option value="user">User</option>
+                <option value="student">Student</option>
                 <option value="admin">Admin</option>
               </select>
             </div>

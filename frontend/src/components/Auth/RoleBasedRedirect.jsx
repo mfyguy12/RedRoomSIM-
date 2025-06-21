@@ -13,38 +13,26 @@ Changelog:
  - Initial setup for RoleBasedRedirect component.
  - Implemented redirection logic based on user roles.
  - Improved user experience with seamless navigation.
+ - Added error handling for undefined roles.
+ - Ensured users are redirected to the correct page after login.
 */
 
 // Import necessary libraries
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-// RoleBasedRedirect component checks the user's role and redirects accordingly. If the user is not authenticated, it redirects to the login page
 const RoleBasedRedirect = () => {
-  const { user } = useAuth();
+  const { role } = useAuth();
   const navigate = useNavigate();
-// Check if the user is authenticated and redirect based on their role
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
-// Redirect based on user role
-    switch (user.role) {
-      case "admin":
-        navigate("/admin");
-        break;
-      case "student":
-        navigate("/dashboard");
-        break;
-      default:
-        navigate("/login", {state: { message: "User role not recognized. Please contact support." },replace: true,});
-        break;
-    }
-  }, [user, navigate]);
 
-  return null; // no UI, only redirect logic
+  useEffect(() => {
+    if (role === "admin") navigate("/admin");
+    else if (role === "student") navigate("/dashboard");
+    else navigate("/login");
+  }, [role]);
+
+  return null;
 };
 
 export default RoleBasedRedirect;

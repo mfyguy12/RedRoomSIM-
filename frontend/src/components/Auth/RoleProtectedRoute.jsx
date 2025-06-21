@@ -13,6 +13,8 @@ Changelog:
  - Initial setup for RoleProtectedRoute component.
  - Implemented role-based access control (RBAC) enforcement.
  - Improved user experience with seamless navigation.
+ - Added error handling for unauthorized access.
+ - Ensured users are redirected to the correct page based on their roles.
 */
 
 // Import necessary libraries
@@ -27,13 +29,13 @@ import { useAuth } from "../../context/AuthContext";
  * If the user has the required role, it renders the children components.
  **/
 const RoleProtectedRoute = ({ allowedRoles, children }) => {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
 
   // Check if the user is authenticated. If not, redirect to the login page
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  const userRole = user.role?.toLowerCase();
+  const userRole = role?.toLowerCase();
   const normalizedAllowed = allowedRoles.map(r => r.toLowerCase());
   // Check if the user's role is allowed. If not, redirect to the dashboard
   if (!normalizedAllowed.includes(userRole)) {

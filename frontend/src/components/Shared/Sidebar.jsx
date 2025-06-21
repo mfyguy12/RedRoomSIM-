@@ -13,6 +13,9 @@ Changelog:
  - Initial setup for Sidebar component.
  - Added support for dark mode styling.
  - Implemented responsive design for better user experience.
+ - Added role-based menu items for admin users.
+ - Improved accessibility with focus states and hover effects.
+ - Added app logo and title with hover effects.
 */
 
 // Import necessary libraries and components
@@ -23,7 +26,7 @@ import logo from "../../assets/logo.png";
 
 // Sidebar component renders the navigation sidebar with links and user role-based menu items
 const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
 
   return (
     <div
@@ -67,7 +70,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           {isOpen && <span>Upload Evidence</span>}
         </Link>
 
-        {user?.role === "admin" && (
+        {role === "admin" && (
           <>
             <Link to="/admin" className="flex items-center space-x-3 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700">
               <span className="text-2xl">⚙️</span>

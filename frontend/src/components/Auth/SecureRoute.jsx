@@ -13,6 +13,7 @@ Changelog:
  - Initial setup for SecureRoute component.
  - Implemented authentication check for protected routes.
  - Improved user experience with seamless navigation.
+  - Added loading state while checking authentication.
 */
 
 
@@ -27,7 +28,9 @@ import { useAuth } from "../../context/AuthContext";
  * If authenticated, it renders the children components.
  **/
 const SecureRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return <div className="p-6">Loading...</div>;
+  
 
   // Check if the user is authenticated. If not, redirect to the login page
   if (!user) {

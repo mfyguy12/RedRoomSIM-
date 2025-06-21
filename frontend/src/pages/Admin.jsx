@@ -12,6 +12,7 @@ Description:          Admin panel landing page.
 Changelog:
  - Initial setup for Admin panel.
  - Integrated user management features.
+ - Added pending user approvals section.
 */
 
 // Import necessary libraries and components
@@ -27,12 +28,12 @@ import UserMonitoringTable from "../components/AdminPanel/UserMonitoringTable";
 import { Users, Clock, FileText, Settings, Puzzle, Monitor } from "lucide-react";
 
 const TABS = [
-  { key: "pendingUsers", label: "Pending Approvals", icon: Clock },
   { key: "manageUsers", label: "Manage Users", icon: Users },
+  { key: "pendingUsers", label: "Pending Approvals", icon: Clock },
   { key: "monitoring", label: "User Monitoring", icon: Monitor },
   { key: "auditLog", label: "Audit Log", icon: FileText },
-  { key: "difficulty", label: "Difficulty Adjustment", icon: Settings },
   { key: "scenarioConfig", label: "Scenario Configurator", icon: Puzzle },
+  { key: "difficulty", label: "Difficulty Adjustment", icon: Settings },
 ];
 
 const Admin = () => {

@@ -15,53 +15,129 @@ Changelog:
  - Integrated Firebase authentication and Firestore for user data.
  - Implemented login and logout functionality.
  - Improved error handling and loading states.
+ - Added user role tracking and management.
+ - Ensured secure access to user data with Firestore rules.
+ - Added support for user account locking after multiple failed login attempts.
+ - Added user role updates after login.
+ - Implemented user data fetching on authentication state change.
 */
 
 // import necessary libraries
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  fetchSignInMethodsForEmail,
+} from "firebase/auth";
 import { auth, db } from "../../firebase/firebaseConfig";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        try {
-          // Fetch role from Firestore
-          const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
-          const role = userDoc.exists() ? userDoc.data().role?.toLowerCase().trim() : null;
-
-          // Store role-enhanced user object
-          setUser({ ...firebaseUser, role });
-        } catch (error) {
-          console.error("Error fetching user role:", error);
-          setUser({ ...firebaseUser, role: null });
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(userRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setCurrentUser(user);
+          setRole(data.role || "pending");
+          setLoading(false);
         }
       } else {
-        setUser(null);
+        setCurrentUser(null);
+        setRole(null);
+        setLoading(false);
       }
-      setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
-  const logout = async () => {
-    await firebaseSignOut(auth);
-    setUser(null);
+  const login = async (email, password) => {
+    try {
+      // Check if user exists in Firestore
+      const q = query(collection(db, "users"), where("email", "==", email));
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        return { success: false, message: "User does not exist." };
+      }
+
+      const found = snapshot.docs[0];
+      const uid = found.id;
+      const userData = found.data();
+
+      if (userData.disabled) {
+        return { success: false, message: "Account disabled due to multiple failed login attempts." };
+      }
+
+      // Try Firebase Auth login
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      // Reset login attempts
+      await updateDoc(doc(db, "users", uid), {
+        failedAttempt: 0,
+        disabled: false,
+      });
+
+      setCurrentUser(userCredential.user);
+      setRole(userData.role || "pending");
+
+      return { success: true };
+    } catch (error) {
+      try {
+        // Track failed login
+        const q = query(collection(db, "users"), where("email", "==", email));
+        const snapshot = await getDocs(q);
+
+        if (!snapshot.empty) {
+          const found = snapshot.docs[0];
+          const ref = doc(db, "users", found.id);
+          const userData = found.data();
+          const currentAttempts = userData.failedAttempt || 0;
+
+          const updates = {
+            failedAttempt: currentAttempts + 1,
+          };
+
+          if (currentAttempts + 1 >= 3) {
+            updates.disabled = true;
+          }
+
+          await updateDoc(ref, updates);
+        }
+      } catch (innerError) {
+        console.error("Error tracking login failure:", innerError);
+      }
+
+      return { success: false, message: error.message };
+    }
   };
 
+  const logout = () => signOut(auth);
+
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
-      {!loading && children}
+    <AuthContext.Provider value={{ loading, user: currentUser, role, login, logout, setUser: setCurrentUser, setRole }}>
+      {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+
