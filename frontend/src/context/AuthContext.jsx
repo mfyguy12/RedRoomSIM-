@@ -40,7 +40,9 @@ import {
   query,
   where,
 } from "firebase/firestore";
-
+////////////////////////////////////////////////////////
+import axios from "axios";
+////////////////////////////////////////////////////////
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -97,6 +99,13 @@ export const AuthProvider = ({ children }) => {
 
       setCurrentUser(userCredential.user);
       setRole(userData.role || "pending");
+      
+      // Log login activity to backend
+      await axios.post("http://localhost:8000/log-login", {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        role: userData.role || "pending",
+      });
 
       return { success: true };
     } catch (error) {
@@ -129,10 +138,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => signOut(auth);
+  const logout = async () => {
+    if (currentUser) {
+      await axios.post("http://localhost:8000/log-logout", {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        role: role || "unknown",
+      });
+    }
+    return signOut(auth);
+  };
+  
+  const logPasswordChange = async () => {
+    if (currentUser) {
+      await axios.post("http://localhost:8000/log-password-change", {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        role: role || "unknown",
+      });
+    }
+  };
+
 
   return (
-    <AuthContext.Provider value={{ loading, user: currentUser, role, login, logout, setUser: setCurrentUser, setRole }}>
+    <AuthContext.Provider value={{ loading, user: currentUser, role, login, logout, logPasswordChange, setUser: setCurrentUser, setRole }}>
       {children}
     </AuthContext.Provider>
   );
