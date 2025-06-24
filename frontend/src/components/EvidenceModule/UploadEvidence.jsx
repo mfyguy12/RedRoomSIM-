@@ -14,60 +14,54 @@ Changelog:
 */
 
 import React, { useState } from "react";
-import ValidateFileModal from "./ValidateFileModal";
+import axios from "axios";
 import ArtifactPreview from "./ArtifactPreview";
 
 const UploadEvidence = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [submittedFiles, setSubmittedFiles] = useState([]);
+  const [file, setFile] = useState(null);
+  const [uploadResult, setUploadResult] = useState(null);
+  const [error, setError] = useState("");
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    setFile(e.target.files[0]);
+    setUploadResult(null);
+    setError("");
+  };
+
+  const handleUpload = async () => {
     if (!file) {
-      setSelectedFile(null);
+      setError("Please select a file.");
       return;
     }
-    setSelectedFile(file);
-  };
 
-  const handleSubmit = () => {
-    if (selectedFile) {
-      setShowModal(true);
-    }
-  };
+    const formData = new FormData();
+    formData.append("file", file);
 
-  const handleValidation = (result) => {
-    setShowModal(false);
-    if (result.success) {
-      setSubmittedFiles([...submittedFiles, selectedFile]);
-      setSelectedFile(null);
-    } else {
-      alert(result.message);
+    try {
+      const response = await axios.post("http://localhost:8000/api/sim/upload-scenario", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setUploadResult(response.data);
+      setError("");
+    } catch (err) {
+      setError("Upload failed. Please try again.");
     }
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <h2 className="text-xl font-bold mb-4">Upload Evidence</h2>
+    <div className="p-6">
+      <h2 className="text-xl font-bold mb-4">Upload Evidence File</h2>
 
-      <input type="file" onChange={handleFileChange} className="border p-2 rounded" />
-
+      <input type="file" onChange={handleFileChange} className="mb-4" />
       <button
-        onClick={handleSubmit}
-        className="bg-[#1F2937] text-white py-2 px-4 rounded hover:bg-[#2c3542]"
-        disabled={!selectedFile}
+        onClick={handleUpload}
+        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
       >
-        Submit Evidence
+        Upload
       </button>
 
-      <ValidateFileModal
-        file={selectedFile}
-        open={showModal}
-        onClose={handleValidation}
-      />
-
-      <ArtifactPreview files={submittedFiles} />
+      {error && <div className="text-red-600 mt-3">{error}</div>}
+      {uploadResult && <ArtifactPreview data={uploadResult} />}
     </div>
   );
 };

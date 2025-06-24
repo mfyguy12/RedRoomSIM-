@@ -19,37 +19,35 @@ Changelog:
 
 import React from "react";
 
-const ScenarioFilterPanel = ({ filters, setFilters }) => {
-  const handleChange = (e) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
+const ScenarioFilterPanel = ({ filters, onChange, scenarios }) => {
+  if (!filters || !scenarios) return null;
+
+  const difficulties = Array.from(new Set(scenarios.map(s => s.difficulty).filter(Boolean)));
+  const types = Array.from(new Set(scenarios.map(s => s.type).filter(Boolean)));
 
   return (
-    <div className="p-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl shadow">
-      <h2 className="text-lg font-semibold mb-3">Filter Scenarios</h2>
-      <div className="grid grid-cols-2 gap-4">
+    <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-6">
+      <h3 className="text-lg font-semibold mb-4">Filter Scenarios</h3>
+      <div className="flex gap-4">
         <select
-          name="difficulty"
-          className="p-2 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           value={filters.difficulty}
-          onChange={handleChange}
+          onChange={(e) => onChange({ ...filters, difficulty: e.target.value })}
+          className="p-2 rounded border dark:bg-gray-700 dark:text-white dark:border-gray-600"
         >
           <option value="">All Difficulties</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+          {difficulties.map((d) => (
+            <option key={d} value={d}>{d}</option>
+          ))}
         </select>
-
         <select
-          name="type"
-          className="p-2 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           value={filters.type}
-          onChange={handleChange}
+          onChange={(e) => onChange({ ...filters, type: e.target.value })}
+          className="p-2 rounded border dark:bg-gray-700 dark:text-white dark:border-gray-600"
         >
           <option value="">All Types</option>
-          <option value="ransomware">Ransomware</option>
-          <option value="data breach">Data Breach</option>
-          <option value="hacktivism">Hacktivism</option>
+          {types.map((t) => (
+            <option key={t} value={t}>{t}</option>
+          ))}
         </select>
       </div>
     </div>

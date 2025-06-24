@@ -18,11 +18,11 @@ Changelog:
 import React from "react";
 import ScenarioCard from "./ScenarioCard";
 
-const ScenarioList = ({ scenarios }) => {
+const ScenarioList = ({ scenarios, onSelect }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid gap-4">
       {scenarios.map((scenario) => (
-        <ScenarioCard key={scenario.id} scenario={scenario} />
+        <ScenarioCard key={scenario.id} scenario={scenario} onSelect={onSelect} />
       ))}
     </div>
   );

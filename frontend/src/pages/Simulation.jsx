@@ -17,71 +17,90 @@ Changelog:
  - Dark mode support added
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DecisionPrompt from "../components/SimulationEngine/DecisionPrompt";
-import FeedbackOverlay from "../components/SimulationEngine/FeedbackOverlay";
-import ScoringBar from "../components/SimulationEngine/ScoringBar";
-import TimelineViewer from "../components/SimulationEngine/TimelineViewer";
-import { allScenarios } from "../data/scenarios";
+import axios from "axios";
 
 const Simulation = () => {
-  const { id } = useParams();
-  const scenarioId = parseInt(id);
-  const scenario = allScenarios[scenarioId];
+  const { scenarioId } = useParams();
+  const [scenario, setScenario] = useState(null);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [feedback, setFeedback] = useState("");
+  const [score, setScore] = useState(0);
+  const [completed, setCompleted] = useState(false);
 
-  if (!scenario) {
+  useEffect(() => {
+    const fetchScenario = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/sim/${scenarioId}`);
+        setScenario(response.data);
+      } catch (error) {
+        console.error("Failed to load scenario", error);
+      }
+    };
+    fetchScenario();
+  }, [scenarioId]);
+
+  const handleOptionSelect = (index) => {
+    if (selectedOption !== null) return;
+
+    const correct = scenario.steps[currentStepIndex].correct_option;
+    setSelectedOption(index);
+
+    if (index === correct) {
+      setScore((prev) => prev + 1);
+      setFeedback("✅ Correct!");
+    } else {
+      setFeedback(`❌ Incorrect. The correct answer was: "${scenario.steps[currentStepIndex].options[correct]}"`);
+    }
+
+    setTimeout(() => {
+      setSelectedOption(null);
+      setFeedback("");
+      if (currentStepIndex + 1 < scenario.steps.length) {
+        setCurrentStepIndex((prev) => prev + 1);
+      } else {
+        setCompleted(true);
+      }
+    }, 2000);
+  };
+
+  if (!scenario) return <div className="p-6">Loading scenario...</div>;
+
+  if (completed) {
     return (
-      <div className="p-6 text-gray-900 dark:text-white">
-        Scenario not found for ID: {id}
+      <div className="p-6 text-center">
+        <h2 className="text-2xl font-bold mb-4">{scenario.name}</h2>
+        <p className="text-xl mb-2">Simulation Complete!</p>
+        <p className="text-lg">Score: {score} / {scenario.steps.length}</p>
       </div>
     );
   }
 
-  const [step, setStep] = useState(0);
-  const [score, setScore] = useState(0);
-  const [feedback, setFeedback] = useState(null);
-  const [timeline, setTimeline] = useState([]);
-
-  const getColorByScore = (score) => {
-    if (score >= 10) return "text-green-600";
-    if (score >= 5) return "text-yellow-600";
-    if (score < 5) return "text-red-600";
-  };
-
-  const handleDecision = (opt) => {
-    const newScore = Math.min(score + opt.score, 100);
-    setScore(newScore);
-    setFeedback({
-      message: opt.feedback,
-      sdlc: opt.sdlc,
-      color: getColorByScore(opt.score),
-    });
-    setTimeline([...timeline, { decision: opt.text, feedback: opt.feedback }]);
-
-    if (step + 1 < scenario.simulation.length) {
-      setStep(step + 1);
-    }
-  };
+  const step = scenario.steps[currentStepIndex];
 
   return (
-    <div className="p-6 space-y-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white rounded-xl transition-colors">
-      <h2 className="text-lg font-bold">
-        {scenario.title} (Scenario ID: {scenarioId})
-      </h2>
+    <div className="p-6 max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded shadow">
+      <h2 className="text-2xl font-bold mb-2">{step.title}</h2>
+      <p className="mb-4 text-gray-700 dark:text-gray-300">{step.description}</p>
 
-      <ScoringBar score={score} />
-      <FeedbackOverlay feedback={feedback} />
+      <div className="space-y-3">
+        {step.options.map((option, index) => (
+          <button
+            key={index}
+            disabled={selectedOption !== null}
+            onClick={() => handleOptionSelect(index)}
+            className={`w-full text-left p-3 rounded border transition 
+              ${selectedOption === index ? "bg-blue-100 dark:bg-blue-700" : "bg-gray-50 dark:bg-gray-900"} 
+              hover:bg-gray-200 dark:hover:bg-gray-700`}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
 
-      {step < scenario.simulation.length ? (
-        <DecisionPrompt
-          prompt={scenario.simulation[step].prompt}
-          options={scenario.simulation[step].options}
-          onDecision={handleDecision}
-        />
-      ) : (
-        <TimelineViewer timeline={timeline} />
-      )}
+      {feedback && <div className="mt-4 text-lg font-medium">{feedback}</div>}
     </div>
   );
 };

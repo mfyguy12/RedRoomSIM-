@@ -59,8 +59,8 @@ const App = () => {
             <Route path="/admin/users" element={<SecureRoute><RoleProtectedRoute allowedRoles={["admin"]}><Layout><AdminUserList /></Layout></RoleProtectedRoute></SecureRoute>}/>
             <Route path="/dashboard" element={<SecureRoute><Layout><Dashboard /></Layout></SecureRoute>} />
             <Route path="/scenarios" element={<SecureRoute><Layout><ScenarioSelectorPage /></Layout></SecureRoute>} />
-            <Route path="/upload" element={<SecureRoute><Layout><Upload /></Layout></SecureRoute>} />
-            <Route path="/simulation/:id" element={<SecureRoute><Layout><Simulation /></Layout></SecureRoute>} />
+            <Route path="/upload" element={<SecureRoute><RoleProtectedRoute allowedRoles={["admin"]}><Layout><Upload /></Layout></RoleProtectedRoute></SecureRoute>}/>
+            <Route path="/simulation/:scenarioId" element={<SecureRoute><Layout><Simulation /></Layout></SecureRoute>} />
             <Route path="/profile" element={<SecureRoute><Layout><ProfilePage /></Layout></SecureRoute>} />
             <Route path="/contact" element={<SecureRoute><Layout><ContactPage /></Layout></SecureRoute>} />
             <Route path="/help" element={<SecureRoute><Layout><HelpPage /></Layout></SecureRoute>} />

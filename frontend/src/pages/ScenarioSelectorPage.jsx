@@ -17,32 +17,47 @@ Changelog:
 */
 
 // Import necessary libraries and components
-import React, { useState } from "react";
-import { ScenarioFilterPanel, ScenarioList } from "../components/ScenarioSelector";
-import { scenarioList } from "../data/scenarios";
+import React, { useEffect, useState } from "react";
+import ScenarioList from "../components/ScenarioSelector/ScenarioList";
+import ScenarioFilterPanel from "../components/ScenarioSelector/ScenarioFilterPanel";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-// ScenarioSelectorPage component renders the scenario selection interface with filters and scenario list
 const ScenarioSelectorPage = () => {
-  // State to manage selected filters for scenarios
+  const [scenarios, setScenarios] = useState([]);
   const [filters, setFilters] = useState({ difficulty: "", type: "" });
-  // Filter scenarios based on selected filters
-  const filteredScenarios = scenarioList.filter((s) => {
-    // Check if scenario matches the selected difficulty and type
-    const matchDifficulty = filters.difficulty ? s.difficulty.toLowerCase() === filters.difficulty.toLowerCase() : true;
-    // Check if scenario matches the selected type
-    const matchType = filters.type ? s.type.toLowerCase() === filters.type.toLowerCase() : true;
-    // Return true if both conditions match, otherwise false
-    return matchDifficulty && matchType;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchScenarios = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/sim/list");
+        setScenarios(response.data.scenarios || []);
+      } catch (err) {
+        console.error("Failed to fetch scenarios", err);
+      }
+    };
+
+    fetchScenarios();
+  }, []);
+
+  const filteredScenarios = scenarios.filter((s) => {
+    const diffMatch = filters.difficulty ? s.difficulty === filters.difficulty : true;
+    const typeMatch = filters.type ? s.type === filters.type : true;
+    return diffMatch && typeMatch;
   });
 
-  // Render the scenario selection page with filter panel and scenario list
+  const handleScenarioSelect = (scenarioId) => {
+    navigate(`/simulation/${scenarioId}`);
+  };
+
   return (
-    <div className="p-6 space-y-6">
-      <ScenarioFilterPanel filters={filters} setFilters={setFilters} />
-      <ScenarioList scenarios={filteredScenarios} />
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Select a Scenario</h1>
+      <ScenarioFilterPanel filters={filters} onChange={setFilters} scenarios={scenarios} />
+      <ScenarioList scenarios={filteredScenarios} onSelect={handleScenarioSelect} />
     </div>
   );
 };
 
-// Export the ScenarioSelectorPage component as default
 export default ScenarioSelectorPage;
