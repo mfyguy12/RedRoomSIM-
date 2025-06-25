@@ -30,6 +30,12 @@ const AdminUserList = () => {
   const [editForm, setEditForm] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const totalUsers = users.length;
+  const activeUsers = users.filter(user => user.role === 'admin' || user.role === 'student').length;
+  const disabledUsers = users.filter(user => user.disabled === true).length;
+  const usersWithoutRole = users.filter(user => !user.role || user.role === 'pending').length;
+
+
   useEffect(() => {
     const fetchUsers = async () => {
       const querySnapshot = await getDocs(collection(db, "users"));
@@ -70,12 +76,27 @@ const AdminUserList = () => {
   if (loading) return <div className="p-6 text-gray-900 dark:text-white">Loading users...</div>;
 
   return (
-    <div className="p-6 text-gray-900 dark:text-white">
-      <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
-
+    <>
       <div className="bg-white dark:bg-gray-800 p-4 rounded shadow mb-6">
-        <h3 className="text-lg font-semibold mb-2">Manage Users</h3>
-
+        <h2 className="text-2xl font-bold mb-4">Manage User</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
+            <p className="text-sm">Total Users</p>
+            <p className="text-lg font-bold">{totalUsers}</p>
+          </div>
+          <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
+            <p className="text-sm">Active</p>
+            <p className="text-lg font-bold">{activeUsers}</p>
+          </div>
+          <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
+            <p className="text-sm">Disabled</p>
+            <p className="text-lg font-bold">{disabledUsers}</p>
+          </div>
+          <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
+            <p className="text-sm">Pending Approval</p>
+            <p className="text-lg font-bold">{usersWithoutRole}</p>
+          </div>
+        </div>
         <input
           type="text"
           placeholder="Search users..."
@@ -133,7 +154,7 @@ const AdminUserList = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
