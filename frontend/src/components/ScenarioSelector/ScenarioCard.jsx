@@ -1,11 +1,12 @@
 import React from "react";
 
 const typeColors = {
-  "Ransomware": "bg-red-100 text-red-800",
-  "Data Breach": "bg-blue-100 text-blue-800",
-  "Hacktivism": "bg-yellow-100 text-yellow-800",
-  "Insider Threat": "bg-green-100 text-green-800",
-  "Phishing": "bg-orange-100 text-orange-800",
+  "Ransomware": "bg-red-200 text-red-800",
+  "Data Breach": "bg-blue-200 text-blue-800",
+  "Hacktivism": "bg-yellow-200 text-yellow-800",
+  "Insider Threat": "bg-green-200 text-green-800",
+  "Phishing": "bg-orange-200 text-orange-800",
+  "Foreign Adversary": "bg-purple-200 text-purple-800",
 };
 
 const ScenarioCard = ({ scenario, onSelect }) => {
@@ -27,7 +28,7 @@ const ScenarioCard = ({ scenario, onSelect }) => {
       </p>
       <button
         onClick={handleStart}
-        className="px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700 transition"
+        className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
       >
         Start Simulation
       </button>
