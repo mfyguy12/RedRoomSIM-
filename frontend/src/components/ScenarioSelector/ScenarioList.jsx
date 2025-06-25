@@ -14,16 +14,23 @@ Changelog:
  - Integrated ScenarioCard component for individual scenario display.
  - Added support for dark mode styling.
 */
-
 import React from "react";
 import ScenarioCard from "./ScenarioCard";
 
 const ScenarioList = ({ scenarios, onSelect }) => {
+  if (!scenarios || scenarios.length === 0) {
+    return <p className="p-6 text-gray-600 dark:text-gray-300">No scenarios found.</p>;
+  }
+
   return (
-    <div className="grid gap-4">
-      {scenarios.map((scenario) => (
-        <ScenarioCard key={scenario.id} scenario={scenario} onSelect={onSelect} />
-      ))}
+    <div className="px-4">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        {scenarios.map((scenario) => (
+          <div key={scenario.id} className="break-inside-avoid">
+            <ScenarioCard scenario={scenario} onSelect={onSelect} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

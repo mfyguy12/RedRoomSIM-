@@ -31,6 +31,7 @@ const TimelineViewer = ({ timeline }) => {
           >
             <p><b>Decision:</b> {entry.decision}</p>
             <p><b>Feedback:</b> {entry.feedback}</p>
+            {/*<p className="text-sm text-gray-500 mt-1">⏱️ Time: {(entry.timeMs / 1000).toFixed(2)} seconds</p>*/}
           </li>
         ))}
       </ul>

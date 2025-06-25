@@ -139,7 +139,6 @@ const UserMonitoringTable = () => {
           <table className="w-full border-collapse">
             <thead className="bg-gray-100 dark:bg-gray-700">
               <tr>
-                <th className="border dark:border-gray-600 px-4 py-2 text-left">UID</th>
                 <th className="border dark:border-gray-600 px-4 py-2 text-left">Email</th>
                 <th className="border dark:border-gray-600 px-4 py-2 text-left">Role</th>
                 <th className="border dark:border-gray-600 px-4 py-2 text-left">Event</th>
@@ -149,7 +148,6 @@ const UserMonitoringTable = () => {
             <tbody>
               {currentLogs.map((log, index) => (
                 <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td className="border dark:border-gray-600 px-4 py-2">{log.uid}</td>
                   <td className="border dark:border-gray-600 px-4 py-2">{log.email}</td>
                   <td className="border dark:border-gray-600 px-4 py-2">{log.role}</td>
                   <td className="border dark:border-gray-600 px-4 py-2 capitalize">{log.event}</td>

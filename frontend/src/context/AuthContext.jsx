@@ -87,7 +87,9 @@ export const AuthProvider = ({ children }) => {
       if (userData.disabled) {
         return { success: false, message: "Account disabled due to multiple failed login attempts." };
       }
-
+      if (userData.role === "pending") {
+        return { success: false, message: "Your account is pending approval. Please wait for an admin to assign a role." };
+      }
       // Try Firebase Auth login
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
