@@ -85,8 +85,11 @@ const UserMonitoringTable = () => {
     const today = new Date().toDateString();
     return log.event === "login" && new Date(log.timestamp).toDateString() === today;
   }).length;
-  const totalLogouts = logs.filter((log) => log.event === "logout").length;
-  const totalPasswordChanges = logs.filter((log) => log.event === "password_change").length;
+  const totalLogouts = logs.filter((log) => {
+    const today = new Date().toDateString();
+    return log.event === "logout" && new Date(log.timestamp).toDateString() === today;
+  }).length;
+  const totalFailedLogin = logs.filter((log) => log.event === "failed_login").length;
 
   return (
     <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl shadow p-6">
@@ -99,15 +102,15 @@ const UserMonitoringTable = () => {
           <p className="text-lg font-bold">{totalLogs}</p>
         </div>
         <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
+          <p className="text-sm">Failed login</p>
+          <p className="text-lg font-bold">{totalFailedLogin}</p>
+        </div>
+        <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
           <p className="text-sm">Logins Today</p>
           <p className="text-lg font-bold">{totalLoginsToday}</p>
         </div>
         <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
-          <p className="text-sm">Password Changes</p>
-          <p className="text-lg font-bold">{totalPasswordChanges}</p>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
-          <p className="text-sm">Logouts</p>
+          <p className="text-sm">Logouts Today</p>
           <p className="text-lg font-bold">{totalLogouts}</p>
         </div>
       </div>

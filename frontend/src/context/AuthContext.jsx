@@ -115,11 +115,14 @@ export const AuthProvider = ({ children }) => {
         // Track failed login
         const q = query(collection(db, "users"), where("email", "==", email));
         const snapshot = await getDocs(q);
-
+        let uid = null;
+        let role = "unknown";
         if (!snapshot.empty) {
           const found = snapshot.docs[0];
           const ref = doc(db, "users", found.id);
           const userData = found.data();
+          uid = found.id;
+          role = userData.role || "unknown";
           const currentAttempts = userData.failedAttempt || 0;
 
           const updates = {
@@ -132,6 +135,11 @@ export const AuthProvider = ({ children }) => {
 
           await updateDoc(ref, updates);
         }
+        await axios.post("http://localhost:8000/api/logs/log-failed-login", {
+          uid,
+          email,
+          role,
+        });
       } catch (innerError) {
         console.error("Error tracking login failure:", innerError);
       }

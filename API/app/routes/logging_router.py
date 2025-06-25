@@ -45,6 +45,28 @@ async def log_logout(request: Request):
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         db.close()
+        
+@router.post("/log-failed-login")
+async def log_failed_login(request: Request):
+    data = await request.json()
+    db = SessionLocal()
+    try:
+        ip_address = request.client.host
+        log_entry = UserLoginLog(
+            uid=data.get("uid", None),
+            email=data["email"],
+            role=data.get("role", "unknown"),
+            event="failed_login",
+            ip_address=ip_address
+        )
+        db.add(log_entry)
+        db.commit()
+        return {"message": "Failed login logged"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        db.close()
 
 @router.post("/log-password-change")
 async def log_password_change(request: Request):
