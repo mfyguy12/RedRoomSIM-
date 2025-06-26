@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       const snapshot = await getDocs(q);
 
       if (snapshot.empty) {
-        return { success: false, message: "User does not exist." };
+        return { success: false, message: "Firebase: Error (auth/invalid-credential)." };
       }
 
       const found = snapshot.docs[0];

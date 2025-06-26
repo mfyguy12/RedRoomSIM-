@@ -64,10 +64,10 @@ const UserMonitoringTable = () => {
   const currentLogs = filteredLogs.slice(indexOfFirstLog, indexOfLastLog);
 
   const exportCSV = () => {
-    const headers = "UID,Email,Role,Event,Timestamp\n";
+    const headers = "Email,Role,Event,Timestamp\n";
     const rows = filteredLogs.map(
       (log) =>
-        `"${log.uid}","${log.email}","${log.role}","${log.event}","${new Date(
+        `"${log.email}","${log.role}","${log.event}","${new Date(
           log.timestamp
         ).toLocaleString()}"`
     );

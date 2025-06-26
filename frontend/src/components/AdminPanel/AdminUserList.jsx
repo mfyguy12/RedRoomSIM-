@@ -30,10 +30,10 @@ const AdminUserList = () => {
   const [editForm, setEditForm] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const totalUsers = users.length;
-  const activeUsers = users.filter(user => user.role === 'admin' || user.role === 'student').length;
-  const disabledUsers = users.filter(user => user.disabled === true).length;
-  const usersWithoutRole = users.filter(user => !user.role || user.role === 'pending').length;
+  const totalUsers = users.filter(user => user.role !== 'pending').length;
+  const activeUsers = users.filter(user => !user.disabled && user.role !== 'pending').length;
+  const disabledUsers = users.filter(user => user.disabled).length;
+  const usersWithoutRole = users.filter(user => user.role === 'pending').length;
 
 
   useEffect(() => {
@@ -85,11 +85,11 @@ const AdminUserList = () => {
             <p className="text-lg font-bold">{totalUsers}</p>
           </div>
           <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
-            <p className="text-sm">Active</p>
+            <p className="text-sm">Active Users</p>
             <p className="text-lg font-bold">{activeUsers}</p>
           </div>
           <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">
-            <p className="text-sm">Disabled</p>
+            <p className="text-sm">Disabled Users</p>
             <p className="text-lg font-bold">{disabledUsers}</p>
           </div>
           <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded shadow">

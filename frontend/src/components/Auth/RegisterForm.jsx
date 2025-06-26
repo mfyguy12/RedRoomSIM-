@@ -83,13 +83,13 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleRegister} className="bg-white p-8 rounded shadow-md w-96 space-y-4">
+    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900">
+      <form onSubmit={handleRegister} className="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-96 space-y-4">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Red Room Simulation" className="h-16 w-16" />
         </div>
 
-        <h2 className="text-2xl font-bold text-center">Red Room Simulation - Register</h2>
+        <h2 className="text-2xl font-bold text-center dark:text-white">Red Room Simulation - Register</h2>
 
         {error && <div className="text-red-500 text-center">{error}</div>}
 
@@ -99,7 +99,7 @@ const RegisterForm = () => {
           placeholder="First Name"
           value={form.firstName}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -109,7 +109,7 @@ const RegisterForm = () => {
           placeholder="Last Name"
           value={form.lastName}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -119,7 +119,7 @@ const RegisterForm = () => {
           placeholder="Designation"
           value={form.designation}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-600"
         />
 
         <input
@@ -128,7 +128,7 @@ const RegisterForm = () => {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -138,15 +138,15 @@ const RegisterForm = () => {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-600"
           required
         />
 
-        <button type="submit" className="w-full  bg-red-600 text-white p-2 rounded hover:bg-red-700">
+        <button type="submit" className="w-full bg-red-600 text-white p-2 rounded hover:bg-red-700">
           Register
         </button>
 
-        <div className="text-center mt-2">
+        <div className="text-center mt-2 dark:text-white">
           Already have an account?{" "}
           <span className="text-red-600 hover:underline cursor-pointer" onClick={() => navigate("/login")}>
             Login here
